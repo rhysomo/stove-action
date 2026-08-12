@@ -14,7 +14,7 @@ deploy-stove:
         name: Game-Windows
         path: build
 
-    - uses: insd47/stove-actions@v1
+    - uses: insd47/stove-action@v1
       with:
         game-id: ${{ vars.STOVE_GAME_ID }}
         source-path: build
