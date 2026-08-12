@@ -1,16 +1,16 @@
 {
   "name": "stove-actions",
   "version": "0.1.0",
-  "description": "GitHub Actions for deploying game builds to the STOVE Store.",
+  "description": "A GitHub Action for uploading game builds to STOVE Studio.",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm --recursive run build",
+    "build": "ncc build src/main.ts -o dist/main --minify && ncc build src/post.ts -o dist/post --minify",
     "check": "pnpm format:check && pnpm typecheck && pnpm test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "pnpm --recursive run test",
-    "typecheck": "pnpm --recursive run typecheck"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "github-actions",
@@ -22,6 +22,10 @@
   "author": "insd47",
   "license": "MIT",
   "packageManager": "pnpm@10.24.0",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "extract-zip": "^2.0.1"
+  },
   "devDependencies": {
     "@types/node": "^24.0.0",
     "@vercel/ncc": "^0.38.4",

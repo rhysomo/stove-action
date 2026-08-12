@@ -1,0 +1,32 @@
+name: STOVE Upload
+description: Upload a game build to STOVE Studio with the official STOVE Uploader CLI.
+author: insd47
+
+inputs:
+  game-id:
+    description: STOVE game ID of the target product.
+    required: true
+  source-path:
+    description: Directory containing the build to upload.
+    required: true
+  description:
+    description: Build description shown in STOVE Studio (1-60 characters).
+    required: true
+  user-id:
+    description: STOVE account email with access to the target product.
+    required: true
+  password:
+    description: STOVE account password.
+    required: true
+  caller-detail:
+    description: Caller-detail key issued by STOVE support (store.support@smilegate.com).
+    required: true
+
+runs:
+  using: node24
+  main: dist/main/index.js
+  post: dist/post/index.js
+
+branding:
+  color: orange
+  icon: upload-cloud

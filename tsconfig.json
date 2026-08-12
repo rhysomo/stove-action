@@ -9,5 +9,6 @@
     "forceConsistentCasingInFileNames": true,
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts"]
 }
