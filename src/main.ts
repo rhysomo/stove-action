@@ -7,6 +7,7 @@ import { join, resolve } from 'node:path';
 import extract from 'extract-zip';
 import { cleanup, workDirectoryState } from './cleanup.js';
 import { runConfig, type Upload } from './config.js';
+import { uploadExclusions } from './exclusions.js';
 
 const cliUrl = 'https://dl-sgvn.onstove.com/tools/UploadTool/STOVEUploaderCLI.zip';
 
@@ -68,7 +69,8 @@ async function main(): Promise<void> {
     });
 
     const config = join(workDirectory, 'run-config.yaml');
-    await writeFile(config, runConfig(upload), { encoding: 'utf8', mode: 0o600 });
+    const exclusions = await uploadExclusions(upload.sourcePath);
+    await writeFile(config, runConfig(upload, exclusions), { encoding: 'utf8', mode: 0o600 });
 
     const child = spawn(executable, ['-c', config], { stdio: 'inherit' });
     const [code] = (await once(child, 'close')) as [number | null];
